@@ -30,9 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Sidebar />
-        <div className="pl-56">
+        <div className="md:pl-56">
           <Header />
-          <main className="min-h-[calc(100vh-3.5rem)] p-6">{children}</main>
+          <main className="min-h-[calc(100vh-3.5rem)] p-4 pb-20 md:p-6 md:pb-6">{children}</main>
         </div>
       </body>
     </html>

@@ -58,9 +58,9 @@ export default function EmailsPage() {
   }
 
   return (
-    <div className="grid h-[calc(100vh-5rem)] grid-cols-1 gap-4 lg:grid-cols-[280px_1fr]">
+    <div className="grid h-auto gap-4 md:h-[calc(100vh-5rem)] lg:grid-cols-[280px_1fr]">
       {/* Sidebar - Account filters */}
-      <div className="flex flex-col gap-2 overflow-y-auto rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+      <div className="flex flex-col gap-2 overflow-y-auto rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 max-md:max-h-48">
         <h2 className="mb-1 px-2 text-xs font-medium uppercase tracking-wider text-[#555]">
           Comptes
         </h2>
@@ -107,7 +107,7 @@ export default function EmailsPage() {
       </div>
 
       {/* Main content */}
-      <div className="flex h-full flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.02]">
+      <div className="flex min-h-[50vh] flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.02] md:h-full">
         {loading ? (
           <div className="flex flex-1 items-center justify-center text-sm text-[#555]">
             Chargement...

@@ -63,12 +63,12 @@ export default function ProjectsPage() {
   return (
     <div className="grid gap-6">
       {/* Project tabs */}
-      <div className="flex gap-1 rounded-lg border border-white/[0.06] bg-white/[0.02] p-1">
+      <div className="flex gap-1 overflow-x-auto rounded-lg border border-white/[0.06] bg-white/[0.02] p-1">
         {projects.map((p) => (
           <button
             key={p.name}
             onClick={() => setActiveProject(p.name)}
-            className={`rounded-md px-4 py-2 text-[13px] font-medium transition-colors ${
+            className={`shrink-0 rounded-md px-4 py-2 text-[13px] font-medium transition-colors ${
               activeProject === p.name
                 ? "bg-white/[0.08] text-white"
                 : "text-[#888] hover:text-white"

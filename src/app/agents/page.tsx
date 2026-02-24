@@ -86,9 +86,9 @@ export default function AgentsPage() {
   }
 
   return (
-    <div className="grid h-[calc(100vh-5rem)] grid-cols-1 gap-4 lg:grid-cols-[260px_1fr]">
+    <div className="grid h-auto gap-4 md:h-[calc(100vh-5rem)] lg:grid-cols-[260px_1fr]">
       {/* Window list */}
-      <div className="flex flex-col gap-2 overflow-y-auto rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+      <div className="flex flex-col gap-2 overflow-y-auto rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 max-md:max-h-48">
         <div className="flex items-center justify-between px-2 pb-1">
           <h2 className="text-xs font-medium uppercase tracking-wider text-[#555]">
             Sessions
@@ -156,10 +156,10 @@ export default function AgentsPage() {
       </div>
 
       {/* Pane content */}
-      <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c]">
+      <div className="flex min-h-[50vh] flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c] md:h-full">
         {currentWindow ? (
           <>
-            <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-2.5">
+            <div className="flex flex-wrap items-center gap-2 border-b border-white/[0.06] px-3 py-2.5 md:gap-3 md:px-4">
               <span className="text-[13px] font-medium text-white">
                 {currentWindow.name}
               </span>
@@ -169,7 +169,7 @@ export default function AgentsPage() {
               <span className="rounded bg-white/[0.06] px-1.5 py-0.5 text-[10px] text-[#666]">
                 {currentWindow.panes.length} pane{currentWindow.panes.length > 1 ? "s" : ""}
               </span>
-              <span className="font-mono text-[11px] text-[#555]">
+              <span className="hidden font-mono text-[11px] text-[#555] sm:inline">
                 {currentWindow.panes[0]?.width}x{currentWindow.panes[0]?.height}
               </span>
             </div>

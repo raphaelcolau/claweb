@@ -23,16 +23,16 @@ export default function Header() {
   const title = getPageTitle(pathname);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-white/[0.06] bg-[#0a0a0a]/80 px-6 backdrop-blur-xl">
-      <h1 className="text-[15px] font-semibold text-white">{title}</h1>
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-white/[0.06] bg-[#0a0a0a]/80 px-4 backdrop-blur-xl md:px-6">
+      <h1 className="truncate text-[15px] font-semibold text-white">{title}</h1>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.03] px-3 py-1.5">
+      <div className="flex shrink-0 items-center gap-2 md:gap-4">
+        <div className="hidden items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.03] px-3 py-1.5 sm:flex">
           <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]" />
           <span className="text-xs text-[#999]">Système OK</span>
         </div>
 
-        <div className="flex items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.03] px-3 py-1.5">
+        <div className="flex items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.03] px-2 py-1.5 md:px-3">
           <ClockIcon />
           <span className="text-xs tabular-nums text-[#999]">
             <CurrentTime />

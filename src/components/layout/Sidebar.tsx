@@ -15,17 +15,49 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 z-40 flex h-screen w-56 flex-col border-r border-white/[0.06] bg-[#0a0a0a]">
-      <div className="flex h-14 items-center gap-2.5 px-5">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
-          <span className="text-sm font-bold text-white">C</span>
+    <>
+      {/* Desktop sidebar */}
+      <aside className="fixed left-0 top-0 z-40 hidden h-screen w-56 flex-col border-r border-white/[0.06] bg-[#0a0a0a] md:flex">
+        <div className="flex h-14 items-center gap-2.5 px-5">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
+            <span className="text-sm font-bold text-white">C</span>
+          </div>
+          <span className="text-[15px] font-semibold tracking-tight text-white">
+            ClaWeb
+          </span>
         </div>
-        <span className="text-[15px] font-semibold tracking-tight text-white">
-          ClaWeb
-        </span>
-      </div>
 
-      <nav className="flex flex-1 flex-col gap-0.5 px-2.5 pt-2">
+        <nav className="flex flex-1 flex-col gap-0.5 px-2.5 pt-2">
+          {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+            const isActive =
+              href === "/" ? pathname === "/" : pathname.startsWith(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`group flex items-center gap-2.5 rounded-md px-2.5 py-[7px] text-[13px] font-medium transition-colors ${
+                  isActive
+                    ? "bg-white/[0.08] text-white"
+                    : "text-[#888] hover:bg-white/[0.04] hover:text-white"
+                }`}
+              >
+                <Icon active={isActive} />
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="border-t border-white/[0.06] p-4">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="text-xs text-[#888]">OpenClaw actif</span>
+          </div>
+        </div>
+      </aside>
+
+      {/* Mobile bottom nav */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-white/[0.06] bg-[#0a0a0a] md:hidden">
         {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
           const isActive =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -33,26 +65,17 @@ export default function Sidebar() {
             <Link
               key={href}
               href={href}
-              className={`group flex items-center gap-2.5 rounded-md px-2.5 py-[7px] text-[13px] font-medium transition-colors ${
-                isActive
-                  ? "bg-white/[0.08] text-white"
-                  : "text-[#888] hover:bg-white/[0.04] hover:text-white"
+              className={`flex flex-1 flex-col items-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+                isActive ? "text-white" : "text-[#666]"
               }`}
             >
               <Icon active={isActive} />
-              {label}
+              <span>{label}</span>
             </Link>
           );
         })}
       </nav>
-
-      <div className="border-t border-white/[0.06] p-4">
-        <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-emerald-500" />
-          <span className="text-xs text-[#888]">OpenClaw actif</span>
-        </div>
-      </div>
-    </aside>
+    </>
   );
 }
 

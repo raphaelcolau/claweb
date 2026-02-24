@@ -140,23 +140,23 @@ export default function RendererPage() {
   const lineCount = code.split("\n").length;
 
   return (
-    <div className="grid h-[calc(100vh-5rem)] grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className="grid h-auto gap-4 md:h-[calc(100vh-5rem)] md:grid-cols-2">
       {/* Editor */}
-      <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c]">
-        <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-2.5">
+      <div className="flex min-h-[40vh] flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c] md:h-full">
+        <div className="flex items-center justify-between border-b border-white/[0.06] px-3 py-2.5 md:px-4">
           <div className="flex items-center gap-2">
             <CodeIcon />
             <span className="text-[13px] font-medium text-white">
               Éditeur JSX
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] tabular-nums text-[#555]">
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="hidden text-[11px] tabular-nums text-[#555] sm:inline">
               {lineCount} lignes
             </span>
             <button
               onClick={() => updatePreview(code)}
-              className="rounded-md border border-white/[0.06] px-3 py-1 text-xs text-[#888] transition-colors hover:bg-white/[0.04] hover:text-white"
+              className="rounded-md border border-white/[0.06] px-2 py-1 text-xs text-[#888] transition-colors hover:bg-white/[0.04] hover:text-white md:px-3"
             >
               Exécuter
             </button>
@@ -165,7 +165,7 @@ export default function RendererPage() {
                 setCode(DEFAULT_CODE);
                 updatePreview(DEFAULT_CODE);
               }}
-              className="rounded-md border border-white/[0.06] px-3 py-1 text-xs text-[#888] transition-colors hover:bg-white/[0.04] hover:text-white"
+              className="rounded-md border border-white/[0.06] px-2 py-1 text-xs text-[#888] transition-colors hover:bg-white/[0.04] hover:text-white md:px-3"
             >
               Reset
             </button>
@@ -193,7 +193,7 @@ export default function RendererPage() {
       </div>
 
       {/* Preview */}
-      <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c]">
+      <div className="flex min-h-[40vh] flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0c] md:h-full">
         <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-2.5">
           <PreviewIcon />
           <span className="text-[13px] font-medium text-white">
