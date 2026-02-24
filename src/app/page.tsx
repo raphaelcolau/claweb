@@ -1,65 +1,100 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="grid gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard label="Agents actifs" value="3" trend="up" />
+        <StatCard label="Emails en attente" value="12" trend="neutral" />
+        <StatCard label="Projets" value="5" trend="up" />
+        <StatCard label="Sessions tmux" value="2" trend="neutral" />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-5">
+          <h2 className="mb-4 text-sm font-medium text-[#888]">
+            Activité récente
+          </h2>
+          <div className="space-y-3">
+            {[
+              { text: "Agent Claude a terminé le build", time: "il y a 2m" },
+              { text: "3 nouveaux emails reçus", time: "il y a 15m" },
+              { text: "Projet claweb mis à jour", time: "il y a 1h" },
+              { text: "Session tmux #2 démarrée", time: "il y a 2h" },
+            ].map((item) => (
+              <div
+                key={item.text}
+                className="flex items-center justify-between rounded-md border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5"
+              >
+                <span className="text-[13px] text-[#ccc]">{item.text}</span>
+                <span className="text-xs text-[#555]">{item.time}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-5">
+          <h2 className="mb-4 text-sm font-medium text-[#888]">
+            Statut système
+          </h2>
+          <div className="space-y-3">
+            {[
+              { service: "OpenClaw Core", status: "online" as const },
+              { service: "Email Worker", status: "online" as const },
+              { service: "Renderer JSX", status: "idle" as const },
+              { service: "tmux Sessions", status: "online" as const },
+            ].map((item) => (
+              <div
+                key={item.service}
+                className="flex items-center justify-between rounded-md border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5"
+              >
+                <span className="text-[13px] text-[#ccc]">
+                  {item.service}
+                </span>
+                <StatusBadge status={item.status} />
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
+    </div>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  trend,
+}: {
+  label: string;
+  value: string;
+  trend: "up" | "down" | "neutral";
+}) {
+  return (
+    <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-5">
+      <p className="text-xs font-medium text-[#888]">{label}</p>
+      <div className="mt-2 flex items-baseline gap-2">
+        <span className="text-2xl font-semibold tabular-nums text-white">
+          {value}
+        </span>
+        {trend === "up" && (
+          <span className="text-xs text-emerald-500">+</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatusBadge({ status }: { status: "online" | "offline" | "idle" }) {
+  const config = {
+    online: { color: "bg-emerald-500", label: "En ligne" },
+    offline: { color: "bg-red-500", label: "Hors ligne" },
+    idle: { color: "bg-amber-500", label: "Inactif" },
+  };
+  const { color, label } = config[status];
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className={`h-1.5 w-1.5 rounded-full ${color}`} />
+      <span className="text-xs text-[#666]">{label}</span>
     </div>
   );
 }
