@@ -1,0 +1,14 @@
+services:
+  claweb:
+    build: .
+    container_name: claweb
+    ports:
+      - "7778:7778"
+    environment:
+      - NODE_ENV=production
+      - PORT=7778
+      - HOSTNAME=0.0.0.0
+      - WORKSPACE_PATH=/workspace
+    restart: unless-stopped
+    volumes:
+      - /mnt/c/Users/Raphael/.openclaw/workspace:/workspace:ro

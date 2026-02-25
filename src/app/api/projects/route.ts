@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const BASE_DIR =
-  process.env.OPENCLAW_DIR ||
-  path.join(process.env.HOME || "/home/rcolau", ".openclaw/workspace/scripts");
+const WORKSPACE =
+  process.env.WORKSPACE_PATH ||
+  path.join(process.env.HOME || "/home/rcolau", ".openclaw/workspace");
+
+const BASE_DIR = process.env.OPENCLAW_DIR || path.join(WORKSPACE, "scripts");
 
 interface JiraConfig {
   host: string;

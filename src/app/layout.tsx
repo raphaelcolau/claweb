@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
@@ -17,6 +17,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ClaWeb — OpenClaw Manager",
   description: "Centralized management interface for OpenClaw",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ClaWeb",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#09090b",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

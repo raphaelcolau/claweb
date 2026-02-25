@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+const WORKSPACE =
+  process.env.WORKSPACE_PATH ||
+  path.join(process.env.HOME || "/home/rcolau", ".openclaw/workspace");
+
 const EMAILS_DIR =
-  process.env.EMAILS_DIR ||
-  path.join(process.env.HOME || "/home/rcolau", ".openclaw/workspace/scripts/emails");
+  process.env.EMAILS_DIR || path.join(WORKSPACE, "scripts/emails");
 
 interface Email {
   id: string;
