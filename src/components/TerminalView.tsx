@@ -36,9 +36,11 @@ export default function TerminalView({ session, window: windowId }: TerminalView
 
     es.onmessage = (event) => {
       try {
-        const ansi = atob(event.data);
+        // Decode base64 → raw bytes → pass to xterm as Uint8Array
+        // (xterm handles UTF-8 natively; atob() would corrupt multi-byte chars)
+        const bytes = Uint8Array.from(atob(event.data), (c) => c.charCodeAt(0));
         term.write("\x1b[2J\x1b[H"); // Clear before each full refresh
-        term.write(ansi);
+        term.write(bytes);
       } catch {
         // ignore decode errors
       }
